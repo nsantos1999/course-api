@@ -33,4 +33,16 @@ export class Course extends BaseEntity {
   @ApiProperty()
   @UpdateDateColumn()
   updatedAt: Date;
+
+  static giveMeAValidCourse(): Course {
+    const course = new Course();
+
+    course.name = 'Name Test';
+    course.description = 'Description Test';
+    course.price = 100.5;
+    course.createdAt = new Date();
+    course.updatedAt = new Date();
+
+    return course;
+  }
 }
