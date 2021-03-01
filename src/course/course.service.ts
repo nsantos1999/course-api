@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CourseRepository } from './course.repository';
 import { CreateCourseDto } from './dto/create-course.dto';
@@ -11,8 +15,16 @@ export class CourseService {
     private courseRepository: CourseRepository,
   ) {}
 
-  create(createCourseDto: CreateCourseDto) {
-    return this.courseRepository.saveCourse(createCourseDto);
+  async create(createCourseDto: CreateCourseDto) {
+    const userSaved = await this.courseRepository.saveCourse(createCourseDto);
+
+    if (!userSaved) {
+      throw new InternalServerErrorException(
+        'We had trouble saving the course',
+      );
+    }
+
+    return userSaved;
   }
 
   findAll() {
@@ -37,7 +49,6 @@ export class CourseService {
 
   async remove(id: number) {
     const result = await this.courseRepository.delete(id);
-
     if (result.affected === 0) {
       throw new NotFoundException(`Course with ID "${id}" not found`);
     }
