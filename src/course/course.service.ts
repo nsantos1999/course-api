@@ -15,8 +15,8 @@ export class CourseService {
     private courseRepository: CourseRepository,
   ) {}
 
-  create(createCourseDto: CreateCourseDto) {
-    const userSaved = this.courseRepository.saveCourse(createCourseDto);
+  async create(createCourseDto: CreateCourseDto) {
+    const userSaved = await this.courseRepository.saveCourse(createCourseDto);
 
     if (!userSaved) {
       throw new InternalServerErrorException(
@@ -49,7 +49,6 @@ export class CourseService {
 
   async remove(id: number) {
     const result = await this.courseRepository.delete(id);
-
     if (result.affected === 0) {
       throw new NotFoundException(`Course with ID "${id}" not found`);
     }
