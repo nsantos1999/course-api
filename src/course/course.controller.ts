@@ -10,10 +10,11 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiResponse } from '@nestjs/swagger';
-import { isArray } from 'class-validator';
 import { CourseService } from './course.service';
+import { AddCourseSectionDto } from './dto/add-course-section.dto';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
+import { CourseSection } from './entities/course-section.entity';
 import { Course } from './entities/course.entity';
 
 @Controller('course')
@@ -65,5 +66,48 @@ export class CourseController {
   })
   remove(@Param('id') id: string) {
     return this.courseService.remove(+id);
+  }
+
+  @Post(':courseId/section')
+  @UsePipes(ValidationPipe)
+  @ApiOkResponse({
+    type: CourseSection,
+    description: 'Add section into course',
+  })
+  addModule(
+    @Param('courseId') courseId: string,
+    @Body() addCourseSectionDto: AddCourseSectionDto,
+  ) {
+    return this.courseService.addModule(+courseId, addCourseSectionDto);
+  }
+
+  @Put(':courseId/section/:courseSectionId')
+  @UsePipes(ValidationPipe)
+  @ApiOkResponse({
+    type: Course,
+    description: 'Update section of course',
+  })
+  updateModule(
+    @Param('courseId') courseId: string,
+    @Param('courseSectionId') courseSectionId: string,
+    @Body() addCourseSectionDto: AddCourseSectionDto,
+  ) {
+    return this.courseService.updateModule(
+      +courseId,
+      +courseSectionId,
+      addCourseSectionDto,
+    );
+  }
+
+  @Delete(':courseId/section/:courseSectionId')
+  @ApiOkResponse({
+    type: Course,
+    description: 'Delete section of course',
+  })
+  deleteModule(
+    @Param('courseId') courseId: string,
+    @Param('courseSectionId') courseSectionId: string,
+  ) {
+    return this.courseService.deleteModule(+courseId, +courseSectionId);
   }
 }

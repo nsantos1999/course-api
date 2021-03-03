@@ -1,21 +1,18 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CourseModule } from './course/course.module';
+import { CourseSection } from './course/course.module';
 
 // Configs objects
-import { envConfig } from './commom/configs/env.config';
-import { typeOrmConfig } from './commom/configs/typeorm.config';
-import { LanguageModule } from './language/language.module';
+import { envConfig } from './configs/env.config';
+import { typeOrmConfig } from './configs/typeorm.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot(envConfig),
     TypeOrmModule.forRoot(typeOrmConfig()),
 
-    CourseModule,
-
-    LanguageModule,
+    CourseSection,
   ],
 })
 export class AppModule {}
