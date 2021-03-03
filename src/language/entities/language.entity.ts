@@ -5,9 +5,11 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
+  Unique,
   UpdateDateColumn,
 } from 'typeorm';
 
+@Unique(['locale'])
 @Entity({ name: 'languages' })
 export class Language extends BaseEntity {
   @ApiProperty()
