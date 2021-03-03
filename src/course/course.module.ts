@@ -9,4 +9,4 @@ import { CourseRepository } from './course.repository';
   controllers: [CourseController],
   providers: [CourseService],
 })
-export class CourseSection {}
+export class CourseModule {}
