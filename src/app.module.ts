@@ -13,9 +13,8 @@ import { LanguageModule } from './language/language.module';
     ConfigModule.forRoot(envConfig),
     TypeOrmModule.forRoot(typeOrmConfig()),
 
-    CourseModule,
-
     LanguageModule,
+    CourseModule,
   ],
 })
 export class AppModule {}
