@@ -6,6 +6,7 @@ import { CourseModule } from './course/course.module';
 // Configs objects
 import { envConfig } from './commom/configs/env.config';
 import { typeOrmConfig } from './commom/configs/typeorm.config';
+import { LanguageModule } from './language/language.module';
 
 @Module({
   imports: [
@@ -13,6 +14,8 @@ import { typeOrmConfig } from './commom/configs/typeorm.config';
     TypeOrmModule.forRoot(typeOrmConfig()),
 
     CourseModule,
+
+    LanguageModule,
   ],
 })
 export class AppModule {}
