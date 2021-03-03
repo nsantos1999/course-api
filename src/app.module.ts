@@ -4,8 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CourseModule } from './course/course.module';
 
 // Configs objects
-import { envConfig } from './commom/configs/env.config';
-import { typeOrmConfig } from './commom/configs/typeorm.config';
+import { envConfig } from './configs/env.config';
+import { typeOrmConfig } from './configs/typeorm.config';
 import { LanguageModule } from './language/language.module';
 
 @Module({
