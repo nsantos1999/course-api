@@ -7,6 +7,7 @@ import { CourseModule } from './course/course.module';
 import { envConfig } from './configs/env.config';
 import { typeOrmConfig } from './configs/typeorm.config';
 import { LanguageModule } from './language/language.module';
+import { SectionModule } from './section/section.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { LanguageModule } from './language/language.module';
 
     LanguageModule,
     CourseModule,
+    SectionModule,
   ],
 })
 export class AppModule {}

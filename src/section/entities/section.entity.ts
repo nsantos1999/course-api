@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Course } from 'src/course/entities/course.entity';
 import {
   BaseEntity,
   Column,
@@ -8,10 +9,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Course } from './course.entity';
 
-@Entity({ name: 'course_sections' })
-export class CourseSection extends BaseEntity {
+@Entity({ name: 'sections' })
+export class Section extends BaseEntity {
   @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;

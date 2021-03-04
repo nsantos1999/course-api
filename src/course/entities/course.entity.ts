@@ -8,8 +8,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { CourseSection } from './course-section.entity';
 // import { CourseSection } from './course-module.entity';
+import { Section } from 'src/section/entities/section.entity';
 
 @Entity({ name: 'courses' })
 export class Course extends BaseEntity {
@@ -30,10 +30,10 @@ export class Course extends BaseEntity {
   price: number;
 
   @ApiProperty()
-  @OneToMany((type) => CourseSection, (courseSection) => courseSection.course, {
+  @OneToMany((type) => Section, (courseSection) => courseSection.course, {
     cascade: ['insert', 'update'],
   })
-  sections: CourseSection[];
+  sections: Section[];
 
   @ApiProperty()
   @CreateDateColumn()

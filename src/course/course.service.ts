@@ -56,43 +56,4 @@ export class CourseService {
       throw new NotFoundException(`Course with ID "${id}" not found`);
     }
   }
-
-  async addModule(courseId: number, AddCourseSectionDto: AddCourseSectionDto) {
-    const course = await this.findOne(courseId);
-
-    return await this.courseRepository.addModule(course, AddCourseSectionDto);
-  }
-
-  async updateModule(
-    courseId: number,
-    courseModuleId: number,
-    AddCourseSectionDto: AddCourseSectionDto,
-  ) {
-    const course = await this.findOne(courseId);
-
-    return await this.courseRepository.updateModule(
-      courseModuleId,
-      course,
-      AddCourseSectionDto,
-    );
-  }
-
-  async deleteModule(courseId: number, courseModuleId: number) {
-    const course = await this.findOne(courseId);
-
-    const remainingModulesAmount = course.sections.length;
-
-    const courseWithRemainingModules = await this.courseRepository.deleteModule(
-      courseModuleId,
-      course,
-    );
-
-    if (remainingModulesAmount === course.sections.length) {
-      throw new NotFoundException(
-        `Course module with ID "${courseModuleId}" not found`,
-      );
-    }
-
-    return courseWithRemainingModules;
-  }
 }
